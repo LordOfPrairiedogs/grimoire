@@ -4,6 +4,9 @@
 
 var express = require('express'),
     http = require('http'),
+    bodyParser = require('body-parser'),
+    methodOverride = require('method-override'),
+    errorHandler = require('error-handler'),
     routes = require('./routes'),
     redis = require('redis'),
     publisherClient = redis.createClient();
@@ -12,22 +15,23 @@ var app = module.exports = express();
 
 // Configuration
 
-app.configure(function () {
+// app.configure(function () {
     app.set('views', __dirname + '/views');
     app.set('view engine', 'pug');
-    app.use(express.bodyParser());
-    app.use(express.methodOverride());
-    app.use(app.router);
+    app.use(bodyParser.json());
+    app.use(bodyParser.urlencoded({extended: true}));
+    app.use(methodOverride());
+    // app.get(app.router);
     app.use(express.static(__dirname + '/public'));
-});
+// });
+app.use(errorHandler);
+// var env = process.env.NODE_ENV || 'development';
+// if ('development' == env) {
+//     // app.use(errorHandler({dumpExceptions: true, showStack: true}));
+// } else if ('production' == env) {
+//     app.use(errorHandler);
+// }
 
-app.configure('development', function () {
-    app.use(express.errorHandler({dumpExceptions: true, showStack: true}));
-});
-
-app.configure('production', function () {
-    app.use(express.errorHandler());
-});
 
 // Routes
 
