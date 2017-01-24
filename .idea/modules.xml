@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/sses-node-example.iml" filepath="$PROJECT_DIR$/sses-node-example.iml" />
+      <module fileurl="file://$PROJECT_DIR$/grimoire.iml" filepath="$PROJECT_DIR$/grimoire.iml" />
     </modules>
   </component>
 </project>
